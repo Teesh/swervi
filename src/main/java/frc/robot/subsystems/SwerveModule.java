@@ -25,12 +25,6 @@ public class SwerveModule {
       0.0
   );
 
-  private final PIDController m_turningPIDController = new PIDController(
-      0.75,
-      0.00000,
-      0.01
-  );
-
   /**
    * Constructs a SwerveModule.
    *
@@ -73,7 +67,6 @@ public class SwerveModule {
 
     // Limit the PID Controller's input range between -pi and pi and set the input
     // to be continuous.
-    m_turningPIDController.enableContinuousInput(-Math.PI, Math.PI);
 
     // m_turningPIDController.setTolerance(0.025);
   }
@@ -96,7 +89,7 @@ public class SwerveModule {
     // Optimize the reference state to avoid spinning further than 90 degrees
 
     SwerveModuleState state = desiredState;
-    state = SwerveModuleState.optimize(desiredState, new Rotation2d(m_turningEncoder.getDistance()));
+    state = SwerveModuleState.optimize(desiredState, new Rotation2d(-m_turningEncoder.getDistance()));
 
     // Calculate the drive output from the drive PID controller.
     double driveOutput = m_drivePIDController.calculate(m_driveEncoder.getRate(), state.speedMetersPerSecond);

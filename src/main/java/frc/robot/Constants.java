@@ -84,7 +84,7 @@ public final class Constants {
 
   public static final class ModuleConstants {
 
-    public static final int kEncoderCPR = 710;
+    public static final int kEncoderCPR = 714;
     public static final double kWheelDiameterMeters = 1.0/Math.PI/10;
     public static final double kDriveEncoderDistancePerPulse =
         // Assumes the encoders are directly mounted on the wheel shafts
