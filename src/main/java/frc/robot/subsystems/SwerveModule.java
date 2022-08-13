@@ -96,32 +96,28 @@ public class SwerveModule {
     // Optimize the reference state to avoid spinning further than 90 degrees
 
     SwerveModuleState state = desiredState;
-    // state = SwerveModuleState.optimize(desiredState, new Rotation2d(m_turningEncoder.getDistance()));
+    state = SwerveModuleState.optimize(desiredState, new Rotation2d(m_turningEncoder.getDistance()));
 
     // Calculate the drive output from the drive PID controller.
     double driveOutput = m_drivePIDController.calculate(m_driveEncoder.getRate(), state.speedMetersPerSecond);
 
-    System.out.println("\n" + m_turningEncoder.getFPGAIndex()/2 + "\n\t" + m_driveEncoder.getRate() + "\n\t" + m_drivePIDController.atSetpoint() + "\n\t" + driveOutput + "\n\t" + state.speedMetersPerSecond);
+    // System.out.println("\n" + m_turningEncoder.getFPGAIndex()/2 + "\n\t" + m_driveEncoder.getRate() + "\n\t" + m_drivePIDController.atSetpoint() + "\n\t" + driveOutput + "\n\t" + state.speedMetersPerSecond);
 
-    // Calculate the turning motor output from the turning PID controller.
-    double turnOutput = m_turningPIDController.calculate(m_turningEncoder.getDistance(), state.angle.getRadians());
-
-    System.out.println(m_turningEncoder.getFPGAIndex()/2 + "\n\t" + m_turningEncoder.getDistance() + "\n\t" + m_turningPIDController.atSetpoint() + "\n\t" + turnOutput + "\n\t" + state.angle.getRadians());
+    System.out.println(m_turningEncoder.getFPGAIndex()/2 + "\n\t" + m_turningEncoder.getDistance() + "\n\t" + state.angle.getRadians());
     
-    // if (m_drivePIDController.atSetpoint()) m_driveMotor.set(0.0);
-    // else m_driveMotor.set(driveOutput);
-    m_driveMotor.set(0);
+    if (m_drivePIDController.atSetpoint()) m_driveMotor.set(0.0);
+    else m_driveMotor.set(driveOutput);
 
-    System.out.println(state.angle.getRadians() / ModuleConstants.kTurningEncoderDistancePerPulse);
+    // System.out.println(state.angle.getRadians() / ModuleConstants.kTurningEncoderDistancePerPulse);
 
-    // m_turningMotor.set(state.angle.getRadians() / 2 / Math.PI);
+    m_turningMotor.set(state.angle.getRadians() / 2 / Math.PI);
 
-    if (m_turningPIDController.atSetpoint()) {
-      m_turningPIDController.reset();
-      m_turningMotor.set(0.0);
-    } else {
-      m_turningMotor.set(turnOutput);
-    }
+    // if (m_turningPIDController.atSetpoint()) {
+    //   m_turningPIDController.reset();
+    //   m_turningMotor.set(0.0);
+    // } else {
+    //   m_turningMotor.set(turnOutput);
+    // }
   }
 
   /** Zeros all the SwerveModule encoders. */

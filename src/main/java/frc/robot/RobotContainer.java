@@ -38,6 +38,7 @@ public class RobotContainer {
 //   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
   Joystick m_driveController = new Joystick(0);
   Joystick m_rotationController = new Joystick(1);
+  XboxController m_controller = new XboxController(2);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -51,9 +52,12 @@ public class RobotContainer {
         new RunCommand(
             () ->
                 m_robotDrive.drive(
-                    m_driveController.getRawAxis(0),
-                    m_driveController.getRawAxis(1),
-                    m_rotationController.getRawAxis(0),
+                    // m_driveController.getRawAxis(0),
+                    // -m_driveController.getRawAxis(1),
+                    // -m_rotationController.getRawAxis(0),
+                    -m_controller.getLeftY(),
+                    -m_controller.getLeftX(),
+                    -m_controller.getLeftTriggerAxis(),
                     false),
             m_robotDrive));
   }
