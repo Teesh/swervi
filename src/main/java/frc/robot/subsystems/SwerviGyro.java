@@ -1,8 +1,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.hal.SimDevice;
-import edu.wpi.first.hal.SimDouble;
 import edu.wpi.first.hal.SimDevice.Direction;
+import edu.wpi.first.hal.SimDouble;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 public class SwerviGyro implements Gyro {
@@ -10,7 +10,9 @@ public class SwerviGyro implements Gyro {
   public void close() throws Exception {}
 
   @Override
-  public void calibrate() {}
+  public void calibrate() {
+    reset();
+  }
 
   @Override
   public void reset() {
@@ -49,9 +51,17 @@ public class SwerviGyro implements Gyro {
     m_rateX = m_gyro.createDouble("rate_x", Direction.kInput, 0.0);
     m_rateY = m_gyro.createDouble("rate_y", Direction.kInput, 0.0);
     m_rateZ = m_gyro.createDouble("rate_z", Direction.kInput, 0.0);
+
+    try {
+      Thread.sleep(1000);
+    } catch (Exception e) {
+      System.err.println(e);
+    }
+
+    reset();
   }
 
-  public double getAngleX() {
+  public double getAngleX() { 
     return m_angleX.get() - m_offsetX;
   }
 

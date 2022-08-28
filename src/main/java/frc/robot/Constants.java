@@ -79,13 +79,13 @@ public final class Constants {
     public static final double kvVoltSecondsPerMeter = 0.8;
     public static final double kaVoltSecondsSquaredPerMeter = 0.15;
 
-    public static final double kMaxSpeedMetersPerSecond = 3;
+    public static final double kMaxSpeedMetersPerSecond = Double.POSITIVE_INFINITY;
   }
 
   public static final class ModuleConstants {
 
     public static final int kEncoderCPR = 714;
-    public static final double kWheelDiameterMeters = 1.0/Math.PI/10;
+    public static final double kWheelDiameterMeters = 0.0282;
     public static final double kDriveEncoderDistancePerPulse =
         // Assumes the encoders are directly mounted on the wheel shafts
         (kWheelDiameterMeters * Math.PI) / (double) kEncoderCPR;
@@ -100,10 +100,10 @@ public final class Constants {
   }
 
   public static final class AutoConstants {
-    public static final double kMaxSpeedMetersPerSecond = 3;
-    public static final double kMaxAccelerationMetersPerSecondSquared = 3;
+    public static final double kMaxSpeedMetersPerSecond = 0.45;
+    public static final double kMaxAccelerationMetersPerSecondSquared = 0.45;
     public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
-    public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
+    public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI * Math.PI;
 
     public static final double kPXController = 1;
     public static final double kPYController = 1;
