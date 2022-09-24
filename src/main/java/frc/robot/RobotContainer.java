@@ -88,11 +88,11 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
 
     Command s1 = generateSwerveCommand(new Pose2d(0, 0, new Rotation2d()), new Pose2d(1.3, 0, new Rotation2d()));
-    Command s2 = generateSwerveCommand(new Pose2d(0, 0, new Rotation2d()), new Pose2d(0, -1.3, new Rotation2d()));
+    // Command s2 = generateSwerveCommand(new Pose2d(0, 0, new Rotation2d()), new Pose2d(0, -1.3, new Rotation2d()));
 
 
     // Run path following command, then stop at the end.
-    return s1.andThen(s2);
+    return s1;
   }
 
   public Command generateSwerveCommand(Pose2d start, Pose2d end) {
